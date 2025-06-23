@@ -23,7 +23,6 @@ import {
   Play,
   TrendingUp,
   Shield,
-  Clock,
   Smartphone,
   Monitor,
   HardDrive,
@@ -35,7 +34,6 @@ import {
   Lock,
   MessageSquare,
   Palette,
-  Settings,
   Workflow,
   Menu,
 } from "lucide-react";
@@ -54,10 +52,22 @@ const App = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   // Scroll reveal hooks
-  const [heroRef, heroInView] = useInView({ threshold: 0.1, triggerOnce: true });
-  const [featuresRef, featuresInView] = useInView({ threshold: 0.1, triggerOnce: true });
-  const [pricingRef, pricingInView] = useInView({ threshold: 0.1, triggerOnce: true });
-  const [teamRef, teamInView] = useInView({ threshold: 0.1, triggerOnce: true });
+  const [heroRef, heroInView] = useInView({
+    threshold: 0.1,
+    triggerOnce: true,
+  });
+  const [featuresRef, featuresInView] = useInView({
+    threshold: 0.1,
+    triggerOnce: true,
+  });
+  const [pricingRef, pricingInView] = useInView({
+    threshold: 0.1,
+    triggerOnce: true,
+  });
+  const [teamRef, teamInView] = useInView({
+    threshold: 0.1,
+    triggerOnce: true,
+  });
   const [ctaRef, ctaInView] = useInView({ threshold: 0.1, triggerOnce: true });
 
   useEffect(() => {
@@ -93,15 +103,15 @@ const App = () => {
         <div className="absolute top-10 sm:top-20 left-4 sm:left-10 w-16 h-16 sm:w-32 sm:h-32 bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-full blur-xl animate-pulse"></div>
         <div className="absolute top-20 sm:top-40 right-8 sm:right-20 w-12 h-12 sm:w-24 sm:h-24 bg-gradient-to-br from-emerald-500/10 to-blue-500/10 rounded-full blur-xl animate-pulse delay-1000"></div>
         <div className="absolute bottom-20 sm:bottom-40 left-8 sm:left-20 w-20 h-20 sm:w-40 sm:h-40 bg-gradient-to-br from-purple-500/10 to-pink-500/10 rounded-full blur-xl animate-pulse delay-2000"></div>
-        
+
         {/* Floating icons - hide on very small screens */}
         {floatingElements.map((element, index) => (
           <div
             key={index}
             className="absolute animate-bounce opacity-20 hidden sm:block"
             style={{
-              left: `${10 + (index * 12)}%`,
-              top: `${20 + (index * 8)}%`,
+              left: `${10 + index * 12}%`,
+              top: `${20 + index * 8}%`,
               animationDelay: element.delay,
               animationDuration: element.duration,
             }}
@@ -141,18 +151,27 @@ const App = () => {
               LIVE
             </Badge>
           </div>
-          
+
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center gap-6 xl:gap-8">
-            <a href="#features" className="text-slate-300 hover:text-white transition-colors duration-300 hover:scale-105 transform flex items-center gap-2 text-sm xl:text-base">
+            <a
+              href="#features"
+              className="text-slate-300 hover:text-white transition-colors duration-300 hover:scale-105 transform flex items-center gap-2 text-sm xl:text-base"
+            >
               <Layers className="h-4 w-4" />
               Features
             </a>
-            <a href="#pricing" className="text-slate-300 hover:text-white transition-colors duration-300 hover:scale-105 transform flex items-center gap-2 text-sm xl:text-base">
+            <a
+              href="#pricing"
+              className="text-slate-300 hover:text-white transition-colors duration-300 hover:scale-105 transform flex items-center gap-2 text-sm xl:text-base"
+            >
               <BarChart3 className="h-4 w-4" />
               Pricing
             </a>
-            <a href="#team" className="text-slate-300 hover:text-white transition-colors duration-300 hover:scale-105 transform flex items-center gap-2 text-sm xl:text-base">
+            <a
+              href="#team"
+              className="text-slate-300 hover:text-white transition-colors duration-300 hover:scale-105 transform flex items-center gap-2 text-sm xl:text-base"
+            >
               <Users className="h-4 w-4" />
               Team
             </a>
@@ -167,9 +186,9 @@ const App = () => {
           </nav>
 
           {/* Mobile Menu Button */}
-          <Button 
-            className="lg:hidden" 
-            variant="ghost" 
+          <Button
+            className="lg:hidden"
+            variant="ghost"
             size="sm"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
@@ -182,15 +201,24 @@ const App = () => {
         {mobileMenuOpen && (
           <div className="lg:hidden border-t border-slate-700/50 bg-slate-800/50 backdrop-blur-xl">
             <div className="container mx-auto px-4 py-4 space-y-3">
-              <a href="#features" className="block text-slate-300 hover:text-white transition-colors duration-300 flex items-center gap-2 py-2">
+              <a
+                href="#features"
+                className="block text-slate-300 hover:text-white transition-colors duration-300 flex items-center gap-2 py-2"
+              >
                 <Layers className="h-4 w-4" />
                 Features
               </a>
-              <a href="#pricing" className="block text-slate-300 hover:text-white transition-colors duration-300 flex items-center gap-2 py-2">
+              <a
+                href="#pricing"
+                className="block text-slate-300 hover:text-white transition-colors duration-300 flex items-center gap-2 py-2"
+              >
                 <BarChart3 className="h-4 w-4" />
                 Pricing
               </a>
-              <a href="#team" className="block text-slate-300 hover:text-white transition-colors duration-300 flex items-center gap-2 py-2">
+              <a
+                href="#team"
+                className="block text-slate-300 hover:text-white transition-colors duration-300 flex items-center gap-2 py-2"
+              >
                 <Users className="h-4 w-4" />
                 Team
               </a>
@@ -208,10 +236,10 @@ const App = () => {
       </header>
 
       {/* Hero Section */}
-      <section 
+      <section
         ref={heroRef}
         className={`py-12 sm:py-16 lg:py-20 px-4 sm:px-6 relative z-10 transition-all duration-1000 ${
-          heroInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          heroInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
         }`}
       >
         <div className="container mx-auto text-center max-w-5xl">
@@ -225,7 +253,7 @@ const App = () => {
               <Sparkles className="h-3 w-3 sm:h-4 sm:w-4 ml-1 sm:ml-2 animate-pulse" />
             </Badge>
           </div>
-          
+
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-6 sm:mb-8 leading-tight px-2">
             The First Task Manager That{" "}
             <span className="relative">
@@ -235,13 +263,13 @@ const App = () => {
               <div className="absolute -bottom-1 sm:-bottom-2 left-0 right-0 h-0.5 sm:h-1 bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 rounded-full animate-pulse"></div>
             </span>
           </h1>
-          
+
           <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-slate-300 mb-8 sm:mb-12 max-w-3xl mx-auto leading-relaxed px-4">
             Pin Point Task Manager combines personal focus management with
             intelligent team collaboration. Eliminate productivity friction with
             our floating task window and AI-powered prioritization.
           </p>
-          
+
           <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center mb-8 sm:mb-12 px-4">
             <Button
               size="lg"
@@ -274,15 +302,21 @@ const App = () => {
               <div
                 key={index}
                 className={`text-center group hover:scale-110 transform transition-all duration-300 ${
-                  heroInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
+                  heroInView
+                    ? "opacity-100 translate-y-0"
+                    : "opacity-0 translate-y-5"
                 }`}
                 style={{ transitionDelay: `${index * 100}ms` }}
               >
                 <div className="flex justify-center mb-2">
                   <stat.icon className="h-6 w-6 sm:h-8 sm:w-8 text-blue-400 group-hover:animate-pulse" />
                 </div>
-                <div className="text-xl sm:text-2xl lg:text-3xl font-bold text-white mb-1">{stat.number}</div>
-                <div className="text-slate-400 text-xs sm:text-sm">{stat.label}</div>
+                <div className="text-xl sm:text-2xl lg:text-3xl font-bold text-white mb-1">
+                  {stat.number}
+                </div>
+                <div className="text-slate-400 text-xs sm:text-sm">
+                  {stat.label}
+                </div>
               </div>
             ))}
           </div>
@@ -290,11 +324,13 @@ const App = () => {
       </section>
 
       {/* Features Section */}
-      <section 
-        id="features" 
+      <section
+        id="features"
         ref={featuresRef}
         className={`py-12 sm:py-16 lg:py-20 px-4 sm:px-6 bg-slate-800/20 relative z-10 transition-all duration-1000 ${
-          featuresInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          featuresInView
+            ? "opacity-100 translate-y-0"
+            : "opacity-0 translate-y-10"
         }`}
       >
         <div className="container mx-auto max-w-6xl">
@@ -303,8 +339,8 @@ const App = () => {
               variant="outline"
               className="mb-4 sm:mb-6 px-3 sm:px-4 py-1 sm:py-2 text-sm sm:text-base bg-purple-500/20 text-purple-300 border-purple-500/30 mx-auto hover:scale-105 transform transition-all duration-300"
             >
-              <Workflow className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
-              ✨ Features
+              <Workflow className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />✨
+              Features
             </Badge>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4 sm:mb-6 px-4">
               Why Choose Pin Point Task Manager?
@@ -318,10 +354,13 @@ const App = () => {
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {/* Feature 1 */}
-            <Card className={`p-6 sm:p-8 bg-gradient-to-br from-slate-800/50 to-slate-900/50 border-slate-700/50 hover:border-blue-500/50 transition-all duration-500 group hover:scale-105 transform relative overflow-hidden ${
-              featuresInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-            }`}
-            style={{ transitionDelay: '100ms' }}
+            <Card
+              className={`p-6 sm:p-8 bg-gradient-to-br from-slate-800/50 to-slate-900/50 border-slate-700/50 hover:border-blue-500/50 transition-all duration-500 group hover:scale-105 transform relative overflow-hidden ${
+                featuresInView
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-10"
+              }`}
+              style={{ transitionDelay: "100ms" }}
             >
               <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               <div className="relative z-10">
@@ -332,17 +371,21 @@ const App = () => {
                   🎯 Floating Focus Window
                 </h3>
                 <p className="text-slate-300 leading-relaxed text-sm sm:text-base">
-                  A persistent, always-on-top task window that follows you across
-                  all applications, ensuring you never lose focus on what matters most.
+                  A persistent, always-on-top task window that follows you
+                  across all applications, ensuring you never lose focus on what
+                  matters most.
                 </p>
               </div>
             </Card>
 
             {/* Feature 2 */}
-            <Card className={`p-6 sm:p-8 bg-gradient-to-br from-slate-800/50 to-slate-900/50 border-slate-700/50 hover:border-purple-500/50 transition-all duration-500 group hover:scale-105 transform relative overflow-hidden ${
-              featuresInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-            }`}
-            style={{ transitionDelay: '200ms' }}
+            <Card
+              className={`p-6 sm:p-8 bg-gradient-to-br from-slate-800/50 to-slate-900/50 border-slate-700/50 hover:border-purple-500/50 transition-all duration-500 group hover:scale-105 transform relative overflow-hidden ${
+                featuresInView
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-10"
+              }`}
+              style={{ transitionDelay: "200ms" }}
             >
               <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               <div className="relative z-10">
@@ -353,17 +396,21 @@ const App = () => {
                   🧠 Smart AI Prioritization
                 </h3>
                 <p className="text-slate-300 leading-relaxed text-sm sm:text-base">
-                  AI-powered algorithm that automatically reorders tasks based on
-                  urgency, impact, dependencies, and team capacity. Work smarter, not harder.
+                  AI-powered algorithm that automatically reorders tasks based
+                  on urgency, impact, dependencies, and team capacity. Work
+                  smarter, not harder.
                 </p>
               </div>
             </Card>
 
             {/* Feature 3 */}
-            <Card className={`p-6 sm:p-8 bg-gradient-to-br from-slate-800/50 to-slate-900/50 border-slate-700/50 hover:border-emerald-500/50 transition-all duration-500 group hover:scale-105 transform relative overflow-hidden sm:col-span-2 lg:col-span-1 ${
-              featuresInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-            }`}
-            style={{ transitionDelay: '300ms' }}
+            <Card
+              className={`p-6 sm:p-8 bg-gradient-to-br from-slate-800/50 to-slate-900/50 border-slate-700/50 hover:border-emerald-500/50 transition-all duration-500 group hover:scale-105 transform relative overflow-hidden sm:col-span-2 lg:col-span-1 ${
+                featuresInView
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-10"
+              }`}
+              style={{ transitionDelay: "300ms" }}
             >
               <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               <div className="relative z-10">
@@ -375,7 +422,8 @@ const App = () => {
                 </h3>
                 <p className="text-slate-300 leading-relaxed text-sm sm:text-base">
                   Real-time team awareness and coordination tools with live
-                  presence, instant updates, and activity feeds that keep everyone in sync.
+                  presence, instant updates, and activity feeds that keep
+                  everyone in sync.
                 </p>
               </div>
             </Card>
@@ -384,11 +432,13 @@ const App = () => {
       </section>
 
       {/* Pricing Section */}
-      <section 
-        id="pricing" 
+      <section
+        id="pricing"
         ref={pricingRef}
         className={`py-12 sm:py-16 lg:py-20 px-4 sm:px-6 relative z-10 transition-all duration-1000 ${
-          pricingInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          pricingInView
+            ? "opacity-100 translate-y-0"
+            : "opacity-0 translate-y-10"
         }`}
       >
         <div className="container mx-auto max-w-6xl">
@@ -405,24 +455,32 @@ const App = () => {
             </h2>
             <p className="text-lg sm:text-xl text-slate-300 max-w-3xl mx-auto px-4">
               Flexible pricing options for individuals, teams, and enterprises.
-              All plans include core features with premium options for growing teams.
+              All plans include core features with premium options for growing
+              teams.
             </p>
           </div>
 
           <div className="grid lg:grid-cols-3 gap-6 sm:gap-8 max-w-5xl mx-auto">
             {/* Free Plan */}
-            <Card className={`p-6 sm:p-8 bg-gradient-to-br from-slate-800/50 to-slate-900/50 border-slate-700/50 hover:border-blue-500/50 transition-all duration-500 group hover:scale-105 transform ${
-              pricingInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-            }`}
-            style={{ transitionDelay: '100ms' }}
+            <Card
+              className={`p-6 sm:p-8 bg-gradient-to-br from-slate-800/50 to-slate-900/50 border-slate-700/50 hover:border-blue-500/50 transition-all duration-500 group hover:scale-105 transform ${
+                pricingInView
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-10"
+              }`}
+              style={{ transitionDelay: "100ms" }}
             >
               <div className="mb-6 sm:mb-8">
                 <div className="flex items-center gap-2 mb-3">
                   <Award className="h-5 w-5 sm:h-6 sm:w-6 text-blue-400" />
-                  <h3 className="text-xl sm:text-2xl font-semibold text-white">🆓 Free</h3>
+                  <h3 className="text-xl sm:text-2xl font-semibold text-white">
+                    🆓 Free
+                  </h3>
                 </div>
                 <div className="flex items-end gap-2 mb-4 sm:mb-6">
-                  <span className="text-4xl sm:text-5xl font-bold text-white">$0</span>
+                  <span className="text-4xl sm:text-5xl font-bold text-white">
+                    $0
+                  </span>
                   <span className="text-slate-400 mb-1 sm:mb-2">/month</span>
                 </div>
                 <p className="text-slate-300 leading-relaxed text-sm sm:text-base">
@@ -441,7 +499,9 @@ const App = () => {
                   <div key={index} className="flex items-start gap-2 sm:gap-3">
                     <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5 text-emerald-400 shrink-0 mt-0.5" />
                     <feature.icon className="h-3 w-3 sm:h-4 sm:w-4 text-slate-400 shrink-0 mt-0.5" />
-                    <span className="text-slate-300 text-sm sm:text-base">{feature.text}</span>
+                    <span className="text-slate-300 text-sm sm:text-base">
+                      {feature.text}
+                    </span>
                   </div>
                 ))}
               </div>
@@ -456,10 +516,13 @@ const App = () => {
             </Card>
 
             {/* Pro Plan */}
-            <Card className={`p-6 sm:p-8 bg-gradient-to-br from-blue-900/30 to-purple-900/30 border-blue-500/50 hover:border-blue-400 transition-all duration-500 relative group hover:scale-110 transform shadow-2xl ${
-              pricingInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-            }`}
-            style={{ transitionDelay: '200ms' }}
+            <Card
+              className={`p-6 sm:p-8 bg-gradient-to-br from-blue-900/30 to-purple-900/30 border-blue-500/50 hover:border-blue-400 transition-all duration-500 relative group hover:scale-110 transform shadow-2xl ${
+                pricingInView
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-10"
+              }`}
+              style={{ transitionDelay: "200ms" }}
             >
               <div className="absolute -top-4 sm:-top-6 left-1/2 transform -translate-x-1/2">
                 <Badge className="bg-gradient-to-r from-blue-500 to-purple-500 text-white border-0 px-3 sm:px-4 py-1 sm:py-2 text-xs sm:text-sm font-semibold animate-pulse">
@@ -470,10 +533,14 @@ const App = () => {
               <div className="mb-6 sm:mb-8">
                 <div className="flex items-center gap-2 mb-3">
                   <Rocket className="h-5 w-5 sm:h-6 sm:w-6 text-purple-400" />
-                  <h3 className="text-xl sm:text-2xl font-semibold text-white">⚡ Pro</h3>
+                  <h3 className="text-xl sm:text-2xl font-semibold text-white">
+                    ⚡ Pro
+                  </h3>
                 </div>
                 <div className="flex items-end gap-2 mb-4 sm:mb-6">
-                  <span className="text-4xl sm:text-5xl font-bold text-white">$9.99</span>
+                  <span className="text-4xl sm:text-5xl font-bold text-white">
+                    $9.99
+                  </span>
                   <span className="text-slate-400 mb-1 sm:mb-2">/month</span>
                 </div>
                 <p className="text-slate-300 leading-relaxed text-sm sm:text-base">
@@ -493,7 +560,9 @@ const App = () => {
                   <div key={index} className="flex items-start gap-2 sm:gap-3">
                     <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5 text-emerald-400 shrink-0 mt-0.5" />
                     <feature.icon className="h-3 w-3 sm:h-4 sm:w-4 text-slate-400 shrink-0 mt-0.5" />
-                    <span className="text-slate-300 text-sm sm:text-base">{feature.text}</span>
+                    <span className="text-slate-300 text-sm sm:text-base">
+                      {feature.text}
+                    </span>
                   </div>
                 ))}
               </div>
@@ -508,18 +577,25 @@ const App = () => {
             </Card>
 
             {/* Enterprise Plan */}
-            <Card className={`p-6 sm:p-8 bg-gradient-to-br from-slate-800/50 to-slate-900/50 border-slate-700/50 hover:border-amber-500/50 transition-all duration-500 group hover:scale-105 transform ${
-              pricingInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-            }`}
-            style={{ transitionDelay: '300ms' }}
+            <Card
+              className={`p-6 sm:p-8 bg-gradient-to-br from-slate-800/50 to-slate-900/50 border-slate-700/50 hover:border-amber-500/50 transition-all duration-500 group hover:scale-105 transform ${
+                pricingInView
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-10"
+              }`}
+              style={{ transitionDelay: "300ms" }}
             >
               <div className="mb-6 sm:mb-8">
                 <div className="flex items-center gap-2 mb-3">
                   <Shield className="h-5 w-5 sm:h-6 sm:w-6 text-amber-400" />
-                  <h3 className="text-xl sm:text-2xl font-semibold text-white">🏢 Enterprise</h3>
+                  <h3 className="text-xl sm:text-2xl font-semibold text-white">
+                    🏢 Enterprise
+                  </h3>
                 </div>
                 <div className="flex items-end gap-2 mb-4 sm:mb-6">
-                  <span className="text-4xl sm:text-5xl font-bold text-white">$24.99</span>
+                  <span className="text-4xl sm:text-5xl font-bold text-white">
+                    $24.99
+                  </span>
                   <span className="text-slate-400 mb-1 sm:mb-2">/month</span>
                 </div>
                 <p className="text-slate-300 leading-relaxed text-sm sm:text-base">
@@ -539,7 +615,9 @@ const App = () => {
                   <div key={index} className="flex items-start gap-2 sm:gap-3">
                     <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5 text-emerald-400 shrink-0 mt-0.5" />
                     <feature.icon className="h-3 w-3 sm:h-4 sm:w-4 text-slate-400 shrink-0 mt-0.5" />
-                    <span className="text-slate-300 text-sm sm:text-base">{feature.text}</span>
+                    <span className="text-slate-300 text-sm sm:text-base">
+                      {feature.text}
+                    </span>
                   </div>
                 ))}
               </div>
@@ -557,11 +635,11 @@ const App = () => {
       </section>
 
       {/* Team Section */}
-      <section 
-        id="team" 
+      <section
+        id="team"
         ref={teamRef}
         className={`py-12 sm:py-16 lg:py-20 px-4 sm:px-6 bg-slate-800/20 relative z-10 transition-all duration-1000 ${
-          teamInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          teamInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
         }`}
       >
         <div className="container mx-auto max-w-6xl">
@@ -584,10 +662,13 @@ const App = () => {
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {/* Team Member 1 */}
-            <Card className={`p-6 sm:p-8 bg-gradient-to-br from-slate-800/50 to-slate-900/50 border-slate-700/50 hover:border-blue-500/50 transition-all duration-500 text-center group hover:scale-105 transform ${
-              teamInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-            }`}
-            style={{ transitionDelay: '100ms' }}
+            <Card
+              className={`p-6 sm:p-8 bg-gradient-to-br from-slate-800/50 to-slate-900/50 border-slate-700/50 hover:border-blue-500/50 transition-all duration-500 text-center group hover:scale-105 transform ${
+                teamInView
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-10"
+              }`}
+              style={{ transitionDelay: "100ms" }}
             >
               <Avatar className="h-24 w-24 sm:h-32 sm:w-32 mx-auto mb-4 sm:mb-6 group-hover:scale-110 transform transition-all duration-300">
                 <AvatarFallback className="text-lg sm:text-2xl bg-gradient-to-br from-blue-500 to-purple-600 text-white font-bold">
@@ -599,28 +680,41 @@ const App = () => {
               </h3>
               <div className="flex items-center justify-center gap-2 mb-3 sm:mb-4">
                 <Rocket className="h-3 w-3 sm:h-4 sm:w-4 text-blue-400" />
-                <p className="text-blue-400 font-semibold text-sm sm:text-base">🚀 Lead Developer</p>
+                <p className="text-blue-400 font-semibold text-sm sm:text-base">
+                  🚀 Lead Developer
+                </p>
               </div>
               <p className="text-slate-300 text-xs sm:text-sm leading-relaxed mb-4 sm:mb-6">
                 Full-stack developer with expertise in React, Next.js, and
-                TypeScript. Passionate about creating intuitive user
-                experiences that make people's lives easier.
+                TypeScript. Passionate about creating intuitive user experiences
+                that make people's lives easier.
               </p>
               <div className="flex justify-center gap-3 sm:gap-4">
-                <Button variant="ghost" size="sm" className="rounded-full hover:scale-110 transform transition-all duration-300">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="rounded-full hover:scale-110 transform transition-all duration-300"
+                >
                   <Github className="h-4 w-4 sm:h-5 sm:w-5 text-slate-400 hover:text-white" />
                 </Button>
-                <Button variant="ghost" size="sm" className="rounded-full hover:scale-110 transform transition-all duration-300">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="rounded-full hover:scale-110 transform transition-all duration-300"
+                >
                   <Globe className="h-4 w-4 sm:h-5 sm:w-5 text-slate-400 hover:text-white" />
                 </Button>
               </div>
             </Card>
 
             {/* Team Member 2 */}
-            <Card className={`p-6 sm:p-8 bg-gradient-to-br from-slate-800/50 to-slate-900/50 border-slate-700/50 hover:border-emerald-500/50 transition-all duration-500 text-center group hover:scale-105 transform ${
-              teamInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-            }`}
-            style={{ transitionDelay: '200ms' }}
+            <Card
+              className={`p-6 sm:p-8 bg-gradient-to-br from-slate-800/50 to-slate-900/50 border-slate-700/50 hover:border-emerald-500/50 transition-all duration-500 text-center group hover:scale-105 transform ${
+                teamInView
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-10"
+              }`}
+              style={{ transitionDelay: "200ms" }}
             >
               <Avatar className="h-24 w-24 sm:h-32 sm:w-32 mx-auto mb-4 sm:mb-6 group-hover:scale-110 transform transition-all duration-300">
                 <AvatarFallback className="text-lg sm:text-2xl bg-gradient-to-br from-emerald-500 to-blue-600 text-white font-bold">
@@ -632,7 +726,9 @@ const App = () => {
               </h3>
               <div className="flex items-center justify-center gap-2 mb-3 sm:mb-4">
                 <Palette className="h-3 w-3 sm:h-4 sm:w-4 text-emerald-400" />
-                <p className="text-emerald-400 font-semibold text-sm sm:text-base">🎨 Graphics Designer</p>
+                <p className="text-emerald-400 font-semibold text-sm sm:text-base">
+                  🎨 Graphics Designer
+                </p>
               </div>
               <p className="text-slate-300 text-xs sm:text-sm leading-relaxed mb-4 sm:mb-6">
                 Creative designer with a keen eye for detail and user interface
@@ -640,30 +736,45 @@ const App = () => {
                 that users love to interact with.
               </p>
               <div className="flex justify-center gap-3 sm:gap-4">
-                <Button variant="ghost" size="sm" className="rounded-full hover:scale-110 transform transition-all duration-300">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="rounded-full hover:scale-110 transform transition-all duration-300"
+                >
                   <Github className="h-4 w-4 sm:h-5 sm:w-5 text-slate-400 hover:text-white" />
                 </Button>
-                <Button variant="ghost" size="sm" className="rounded-full hover:scale-110 transform transition-all duration-300">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="rounded-full hover:scale-110 transform transition-all duration-300"
+                >
                   <Globe className="h-4 w-4 sm:h-5 sm:w-5 text-slate-400 hover:text-white" />
                 </Button>
               </div>
             </Card>
 
             {/* Team Member 3 */}
-            <Card className={`p-6 sm:p-8 bg-gradient-to-br from-slate-800/50 to-slate-900/50 border-slate-700/50 hover:border-amber-500/50 transition-all duration-500 text-center group hover:scale-105 transform sm:col-span-2 lg:col-span-1 ${
-              teamInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-            }`}
-            style={{ transitionDelay: '300ms' }}
+            <Card
+              className={`p-6 sm:p-8 bg-gradient-to-br from-slate-800/50 to-slate-900/50 border-slate-700/50 hover:border-amber-500/50 transition-all duration-500 text-center group hover:scale-105 transform sm:col-span-2 lg:col-span-1 ${
+                teamInView
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-10"
+              }`}
+              style={{ transitionDelay: "300ms" }}
             >
               <Avatar className="h-24 w-24 sm:h-32 sm:w-32 mx-auto mb-4 sm:mb-6 group-hover:scale-110 transform transition-all duration-300">
                 <AvatarFallback className="text-lg sm:text-2xl bg-gradient-to-br from-amber-500 to-red-600 text-white font-bold">
                   EM
                 </AvatarFallback>
               </Avatar>
-              <h3 className="text-xl sm:text-2xl font-semibold text-white mb-2">Erman</h3>
+              <h3 className="text-xl sm:text-2xl font-semibold text-white mb-2">
+                Erman
+              </h3>
               <div className="flex items-center justify-center gap-2 mb-3 sm:mb-4">
                 <HardDrive className="h-3 w-3 sm:h-4 sm:w-4 text-amber-400" />
-                <p className="text-amber-400 font-semibold text-sm sm:text-base">⚙️ Backend Developer</p>
+                <p className="text-amber-400 font-semibold text-sm sm:text-base">
+                  ⚙️ Backend Developer
+                </p>
               </div>
               <p className="text-slate-300 text-xs sm:text-sm leading-relaxed mb-4 sm:mb-6">
                 Experienced backend developer with expertise in Node.js,
@@ -671,10 +782,18 @@ const App = () => {
                 security, and building rock-solid foundations.
               </p>
               <div className="flex justify-center gap-3 sm:gap-4">
-                <Button variant="ghost" size="sm" className="rounded-full hover:scale-110 transform transition-all duration-300">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="rounded-full hover:scale-110 transform transition-all duration-300"
+                >
                   <Github className="h-4 w-4 sm:h-5 sm:w-5 text-slate-400 hover:text-white" />
                 </Button>
-                <Button variant="ghost" size="sm" className="rounded-full hover:scale-110 transform transition-all duration-300">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="rounded-full hover:scale-110 transform transition-all duration-300"
+                >
                   <Globe className="h-4 w-4 sm:h-5 sm:w-5 text-slate-400 hover:text-white" />
                 </Button>
               </div>
@@ -684,10 +803,10 @@ const App = () => {
       </section>
 
       {/* CTA Section */}
-      <section 
+      <section
         ref={ctaRef}
         className={`py-12 sm:py-16 lg:py-20 px-4 sm:px-6 relative z-10 transition-all duration-1000 ${
-          ctaInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          ctaInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
         }`}
       >
         <div className="container mx-auto max-w-5xl">
@@ -702,7 +821,8 @@ const App = () => {
               </h2>
               <p className="text-lg sm:text-xl text-slate-300 max-w-3xl mx-auto mb-8 sm:mb-10 leading-relaxed px-4">
                 Join thousands of professionals who have already boosted their
-                productivity with Pin Point Task Manager. Start your journey today!
+                productivity with Pin Point Task Manager. Start your journey
+                today!
               </p>
               <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center">
                 <Button
@@ -744,7 +864,8 @@ const App = () => {
               </div>
               <p className="text-slate-400 text-sm leading-relaxed">
                 The first productivity tool that follows you everywhere AND
-                tells you exactly what to work on next. Made with ❤️ for productivity enthusiasts.
+                tells you exactly what to work on next. Made with ❤️ for
+                productivity enthusiasts.
               </p>
             </div>
 
@@ -850,15 +971,23 @@ const App = () => {
 
           <div className="border-t border-slate-700/50 mt-8 sm:mt-12 pt-6 sm:pt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
             <p className="text-slate-400 text-sm flex items-center gap-2 text-center sm:text-left">
-              © 2025 TaskVibe. All rights reserved. Made with 
-              <Heart className="h-4 w-4 text-red-400 animate-pulse" /> 
+              © 2025 TaskVibe. All rights reserved. Made with
+              <Heart className="h-4 w-4 text-red-400 animate-pulse" />
               for productivity lovers.
             </p>
             <div className="flex gap-3 sm:gap-4">
-              <Button variant="ghost" size="sm" className="rounded-full hover:scale-110 transform transition-all duration-300">
+              <Button
+                variant="ghost"
+                size="sm"
+                className="rounded-full hover:scale-110 transform transition-all duration-300"
+              >
                 <Github className="h-4 w-4 sm:h-5 sm:w-5 text-slate-400 hover:text-white" />
               </Button>
-              <Button variant="ghost" size="sm" className="rounded-full hover:scale-110 transform transition-all duration-300">
+              <Button
+                variant="ghost"
+                size="sm"
+                className="rounded-full hover:scale-110 transform transition-all duration-300"
+              >
                 <Globe className="h-4 w-4 sm:h-5 sm:w-5 text-slate-400 hover:text-white" />
               </Button>
             </div>
@@ -893,8 +1022,12 @@ const App = () => {
                     <Monitor className="h-5 w-5 sm:h-6 sm:w-6 text-blue-400" />
                   </div>
                   <div>
-                    <h3 className="text-white font-medium text-sm sm:text-base">Windows</h3>
-                    <p className="text-slate-400 text-xs sm:text-sm">Windows 10/11</p>
+                    <h3 className="text-white font-medium text-sm sm:text-base">
+                      Windows
+                    </h3>
+                    <p className="text-slate-400 text-xs sm:text-sm">
+                      Windows 10/11
+                    </p>
                   </div>
                 </div>
               </Card>
@@ -906,8 +1039,12 @@ const App = () => {
                     <Laptop className="h-5 w-5 sm:h-6 sm:w-6 text-slate-300" />
                   </div>
                   <div>
-                    <h3 className="text-white font-medium text-sm sm:text-base">macOS</h3>
-                    <p className="text-slate-400 text-xs sm:text-sm">macOS 11+</p>
+                    <h3 className="text-white font-medium text-sm sm:text-base">
+                      macOS
+                    </h3>
+                    <p className="text-slate-400 text-xs sm:text-sm">
+                      macOS 11+
+                    </p>
                   </div>
                 </div>
               </Card>
@@ -919,7 +1056,9 @@ const App = () => {
                     <HardDrive className="h-5 w-5 sm:h-6 sm:w-6 text-amber-400" />
                   </div>
                   <div>
-                    <h3 className="text-white font-medium text-sm sm:text-base">Linux</h3>
+                    <h3 className="text-white font-medium text-sm sm:text-base">
+                      Linux
+                    </h3>
                     <p className="text-slate-400 text-xs sm:text-sm">
                       Ubuntu, Debian, Fedora
                     </p>
@@ -934,8 +1073,12 @@ const App = () => {
                     <Smartphone className="h-5 w-5 sm:h-6 sm:w-6 text-emerald-400" />
                   </div>
                   <div>
-                    <h3 className="text-white font-medium text-sm sm:text-base">Mobile</h3>
-                    <p className="text-slate-400 text-xs sm:text-sm">iOS & Android</p>
+                    <h3 className="text-white font-medium text-sm sm:text-base">
+                      Mobile
+                    </h3>
+                    <p className="text-slate-400 text-xs sm:text-sm">
+                      iOS & Android
+                    </p>
                   </div>
                 </div>
               </Card>
