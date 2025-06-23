@@ -45,6 +45,7 @@ import {
 } from "@/components/ui/dialog";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import ErrorScreen from './components/ErrorScreen';
+import LoadingScreen from './components/LoadingScreen';
 
 const App = () => {
   const [downloadModalOpen, setDownloadModalOpen] = useState(false);
@@ -52,6 +53,8 @@ const App = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showError, setShowError] = useState(false);
+  const [showLoadingScreen, setShowLoadingScreen] = useState(false);
+  const [loadingProgress, setLoadingProgress] = useState(0);
 
   // Scroll reveal hooks
   const [heroRef, heroInView] = useInView({
@@ -81,6 +84,23 @@ const App = () => {
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
 
+  // Loading simulation
+  useEffect(() => {
+    if (showLoadingScreen) {
+      const timer = setInterval(() => {
+        setLoadingProgress(prev => {
+          if (prev >= 100) {
+            clearInterval(timer);
+            setTimeout(() => setShowLoadingScreen(false), 1000);
+            return 100;
+          }
+          return prev + Math.random() * 15;
+        });
+      }, 200);
+      return () => clearInterval(timer);
+    }
+  }, [showLoadingScreen]);
+
   const handleDownload = (plan: string) => {
     setSelectedPlan(plan);
     setDownloadModalOpen(true);
@@ -95,6 +115,11 @@ const App = () => {
     setShowError(false);
   };
 
+  const handleShowLoading = () => {
+    setLoadingProgress(0);
+    setShowLoadingScreen(true);
+  };
+
   if (showError) {
     return (
       <ErrorScreen
@@ -102,6 +127,19 @@ const App = () => {
         message="This is a demonstration of the error screen component with the same design aesthetic as your landing page."
         onRetry={handleRetryError}
         onHome={() => setShowError(false)}
+      />
+    );
+  }
+
+  if (showLoadingScreen) {
+    return (
+      <LoadingScreen 
+        message="Preparing your dashboard"
+        subMessage="Setting up your personalized experience..."
+        progress={loadingProgress}
+        showProgress={true}
+        variant="detailed"
+        onComplete={() => setShowLoadingScreen(false)}
       />
     );
   }
@@ -296,10 +334,10 @@ const App = () => {
             <Button
               size="lg"
               className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-6 sm:px-10 py-3 sm:py-4 text-base sm:text-lg font-semibold transform hover:scale-105 transition-all duration-300 shadow-2xl hover:shadow-blue-500/25"
-              onClick={() => handleDownload("free")}
+              onClick={handleShowLoading}
             >
-              <Download className="h-5 w-5 sm:h-6 sm:w-6 mr-2 sm:mr-3 animate-bounce" />
-              Download Free
+              <Play className="h-5 w-5 sm:h-6 sm:w-6 mr-2 sm:mr-3 animate-bounce" />
+              Get Started
               <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5 ml-2" />
             </Button>
             <Button
@@ -308,9 +346,9 @@ const App = () => {
               onClick={handleShowError}
               className="border-slate-600 text-slate-300 hover:bg-slate-700 px-6 sm:px-10 py-3 sm:py-4 text-base sm:text-lg font-semibold transform hover:scale-105 transition-all duration-300 group"
             >
-              <Play className="h-4 w-4 sm:h-5 sm:w-5 mr-2 sm:mr-3 group-hover:animate-pulse" />
-              View Error Demo
-              <Globe className="h-4 w-4 sm:h-5 sm:w-5 ml-2" />
+              <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5 mr-2 sm:mr-3 group-hover:animate-pulse" />
+              Learn More
+              <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5 ml-2" />
             </Button>
           </div>
 
