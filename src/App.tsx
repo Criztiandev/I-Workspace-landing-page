@@ -44,12 +44,14 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import ErrorScreen from './components/ErrorScreen';
 
 const App = () => {
   const [downloadModalOpen, setDownloadModalOpen] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [showError, setShowError] = useState(false);
 
   // Scroll reveal hooks
   const [heroRef, heroInView] = useInView({
@@ -83,6 +85,26 @@ const App = () => {
     setSelectedPlan(plan);
     setDownloadModalOpen(true);
   };
+
+  // Demo function to show error screen
+  const handleShowError = () => {
+    setShowError(true);
+  };
+
+  const handleRetryError = () => {
+    setShowError(false);
+  };
+
+  if (showError) {
+    return (
+      <ErrorScreen
+        title="Demo Error Screen"
+        message="This is a demonstration of the error screen component with the same design aesthetic as your landing page."
+        onRetry={handleRetryError}
+        onHome={() => setShowError(false)}
+      />
+    );
+  }
 
   const floatingElements = [
     { icon: Zap, delay: "0s", duration: "6s" },
@@ -283,10 +305,11 @@ const App = () => {
             <Button
               size="lg"
               variant="outline"
+              onClick={handleShowError}
               className="border-slate-600 text-slate-300 hover:bg-slate-700 px-6 sm:px-10 py-3 sm:py-4 text-base sm:text-lg font-semibold transform hover:scale-105 transition-all duration-300 group"
             >
               <Play className="h-4 w-4 sm:h-5 sm:w-5 mr-2 sm:mr-3 group-hover:animate-pulse" />
-              Watch Demo
+              View Error Demo
               <Globe className="h-4 w-4 sm:h-5 sm:w-5 ml-2" />
             </Button>
           </div>
