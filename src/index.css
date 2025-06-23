@@ -166,6 +166,20 @@
   --toast-info-border: oklch(0.3 0.05 220);
 }
 
+/* Responsive utilities */
+@media (max-width: 320px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+@media (min-width: 1440px) {
+  .container {
+    max-width: 1440px;
+  }
+}
+
 /* Custom animations */
 @keyframes gradient-x {
   0%, 100% {
@@ -188,6 +202,17 @@
   body {
     @apply bg-background text-foreground;
   }
+  
+  /* Responsive text scaling */
+  html {
+    font-size: 14px;
+  }
+  
+  @media (min-width: 640px) {
+    html {
+      font-size: 16px;
+    }
+  }
 
   /* Ensure dark mode is applied to the body */
   html {
@@ -196,6 +221,47 @@
 
   body {
     @apply bg-slate-900 text-slate-100;
+  }
+  
+  /* Responsive container */
+  .container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  @media (min-width: 640px) {
+    .container {
+      max-width: 640px;
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+  }
+  
+  @media (min-width: 768px) {
+    .container {
+      max-width: 768px;
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .container {
+      max-width: 1024px;
+    }
+  }
+  
+  @media (min-width: 1280px) {
+    .container {
+      max-width: 1280px;
+    }
+  }
+  
+  @media (min-width: 1440px) {
+    .container {
+      max-width: 1440px;
+    }
   }
 }
 
