@@ -5,7 +5,6 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import ThankYouPage from "./components/ThankYouPage";
 import {
-  CheckCircle,
   Download,
   Github,
   Globe,
@@ -34,7 +33,6 @@ import {
   Layers,
   Lock,
   MessageSquare,
-  Palette,
   Workflow,
   Menu,
 } from "lucide-react";
@@ -44,7 +42,6 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import ErrorScreen from "./components/ErrorScreen";
 import LoadingScreen from "./components/LoadingScreen";
 
@@ -72,10 +69,7 @@ const App = () => {
     threshold: 0.1,
     triggerOnce: true,
   });
-  const [teamRef, teamInView] = useInView({
-    threshold: 0.1,
-    triggerOnce: true,
-  });
+
   const [ctaRef, ctaInView] = useInView({ threshold: 0.1, triggerOnce: true });
 
   useEffect(() => {
@@ -221,7 +215,7 @@ const App = () => {
                 className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl object-contain bg-white"
               />
             </div>
-            <span className="text-lg sm:text-2xl font-bold text-slate-100 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+            <span className="text-lg sm:text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
               IWorkspace
             </span>
             <Badge className="bg-emerald-500/20 text-emerald-300 border-emerald-500/30 animate-pulse text-xs sm:text-sm px-1 sm:px-2">
