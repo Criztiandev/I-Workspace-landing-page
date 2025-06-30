@@ -3,6 +3,7 @@ import { useInView } from "react-intersection-observer";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import ThankYouPage from "./components/ThankYouPage";
 import {
   CheckCircle,
   Download,
@@ -55,6 +56,8 @@ const App = () => {
   const [showError, setShowError] = useState(false);
   const [showLoadingScreen, setShowLoadingScreen] = useState(false);
   const [loadingProgress, setLoadingProgress] = useState(0);
+  const [showThankYouPage, setShowThankYouPage] = useState(false);
+  const [videoModalOpen, setVideoModalOpen] = useState(false);
 
   // Scroll reveal hooks
   const [heroRef, heroInView] = useInView({
@@ -105,6 +108,11 @@ const App = () => {
     setSelectedPlan(plan);
     setDownloadModalOpen(true);
   };
+  
+  const handleCompleteDownload = () => {
+    setDownloadModalOpen(false);
+    setShowThankYouPage(true);
+  };
 
   // Demo function to show error screen
   const handleShowError = () => {
@@ -140,6 +148,15 @@ const App = () => {
         showProgress={true}
         variant="detailed"
         onComplete={() => setShowLoadingScreen(false)}
+      />
+    );
+  }
+  
+  if (showThankYouPage && selectedPlan) {
+    return (
+      <ThankYouPage 
+        onBackToHome={() => setShowThankYouPage(false)} 
+        plan={selectedPlan}
       />
     );
   }
@@ -198,13 +215,10 @@ const App = () => {
         <div className="container mx-auto px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between">
           <div className="flex items-center gap-2 sm:gap-3 group">
             <div className="relative">
-              <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg sm:rounded-xl flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300">
-                <Sparkles className="h-4 w-4 sm:h-6 sm:w-6 text-white animate-pulse" />
-              </div>
-              <div className="absolute -top-0.5 -right-0.5 sm:-top-1 sm:-right-1 w-2 h-2 sm:w-3 sm:h-3 bg-emerald-400 rounded-full animate-ping"></div>
+              <img src="/logo/iworkspace.png" alt="IWorkspace Logo" className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl object-contain bg-white" />
             </div>
             <span className="text-lg sm:text-2xl font-bold text-slate-100 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-              TaskVibe
+              IWorkspace
             </span>
             <Badge className="bg-emerald-500/20 text-emerald-300 border-emerald-500/30 animate-pulse text-xs sm:text-sm px-1 sm:px-2">
               <Activity className="h-2 w-2 sm:h-3 sm:w-3 mr-1" />
@@ -324,8 +338,8 @@ const App = () => {
             </span>
           </h1>
 
-          <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-slate-300 mb-8 sm:mb-12 max-w-3xl mx-auto leading-relaxed px-4">
-            Pin Point Task Manager combines personal focus management with
+                        <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-slate-300 mb-8 sm:mb-12 max-w-3xl mx-auto leading-relaxed px-4">
+            IWorkspace combines personal focus management with
             intelligent team collaboration. Eliminate productivity friction with
             our floating task window and AI-powered prioritization.
           </p>
@@ -404,7 +418,7 @@ const App = () => {
               Features
             </Badge>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4 sm:mb-6 px-4">
-              Why Choose Pin Point Task Manager?
+              Why Choose IWorkspace?
             </h2>
             <p className="text-lg sm:text-xl text-slate-300 max-w-3xl mx-auto px-4">
               Our revolutionary approach to task management combines
@@ -716,8 +730,7 @@ const App = () => {
               Meet the Creators
             </h2>
             <p className="text-lg sm:text-xl text-slate-300 max-w-3xl mx-auto px-4">
-              Our talented team of developers and designers who brought Pin
-              Point Task Manager to life with passion and dedication.
+              Our talented team of developers and designers who brought IWorkspace to life with passion and dedication.
             </p>
           </div>
 
@@ -783,7 +796,7 @@ const App = () => {
                 </AvatarFallback>
               </Avatar>
               <h3 className="text-xl sm:text-2xl font-semibold text-white mb-2">
-                Ted Fabiona
+                Ted Pabiona
               </h3>
               <div className="flex items-center justify-center gap-2 mb-3 sm:mb-4">
                 <Palette className="h-3 w-3 sm:h-4 sm:w-4 text-emerald-400" />
@@ -882,7 +895,7 @@ const App = () => {
               </h2>
               <p className="text-lg sm:text-xl text-slate-300 max-w-3xl mx-auto mb-8 sm:mb-10 leading-relaxed px-4">
                 Join thousands of professionals who have already boosted their
-                productivity with Pin Point Task Manager. Start your journey
+                productivity with IWorkspace. Start your journey
                 today!
               </p>
               <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center">
@@ -898,6 +911,7 @@ const App = () => {
                 <Button
                   size="lg"
                   variant="outline"
+                  onClick={() => setVideoModalOpen(true)}
                   className="border-slate-500 text-slate-300 hover:bg-slate-700 px-6 sm:px-10 py-3 sm:py-4 text-base sm:text-lg font-semibold transform hover:scale-110 transition-all duration-300 group"
                 >
                   <Play className="h-4 w-4 sm:h-5 sm:w-5 mr-2 sm:mr-3 group-hover:animate-pulse" />
@@ -917,10 +931,10 @@ const App = () => {
             <div className="sm:col-span-2 lg:col-span-1">
               <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
                 <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg sm:rounded-xl flex items-center justify-center">
-                  <Sparkles className="h-5 w-5 sm:h-6 sm:w-6 text-white animate-pulse" />
+                  <img src="/logo/iworkspace.png" alt="IWorkspace Logo" className="w-5 h-5 sm:w-6 sm:h-6 object-contain" />
                 </div>
                 <span className="text-xl sm:text-2xl font-bold text-slate-100 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                  TaskVibe
+                  IWorkspace
                 </span>
               </div>
               <p className="text-slate-400 text-sm leading-relaxed">
@@ -1032,7 +1046,7 @@ const App = () => {
 
           <div className="border-t border-slate-700/50 mt-8 sm:mt-12 pt-6 sm:pt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
             <p className="text-slate-400 text-sm flex items-center gap-2 text-center sm:text-left">
-              © 2025 TaskVibe. All rights reserved. Made with
+              © 2025 IWorkspace. All rights reserved. Made with
               <Heart className="h-4 w-4 text-red-400 animate-pulse" />
               for productivity lovers.
             </p>
@@ -1072,12 +1086,15 @@ const App = () => {
 
           <div className="space-y-4 py-4">
             <p className="text-slate-300 text-sm sm:text-base">
-              Choose your preferred platform to download Pin Point Task Manager:
+              Choose your preferred platform to download IWorkspace:
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mt-6">
               {/* Windows */}
-              <Card className="p-3 sm:p-4 bg-slate-700/50 border-slate-600 hover:bg-slate-700 transition-all cursor-pointer hover:scale-105 transform duration-300">
+              <Card 
+                className="p-3 sm:p-4 bg-slate-700/50 border-slate-600 hover:bg-slate-700 transition-all cursor-pointer hover:scale-105 transform duration-300"
+                onClick={handleCompleteDownload}
+              >
                 <div className="flex items-center gap-2 sm:gap-3">
                   <div className="p-1.5 sm:p-2 bg-blue-500/20 rounded-lg">
                     <Monitor className="h-5 w-5 sm:h-6 sm:w-6 text-blue-400" />
@@ -1094,7 +1111,10 @@ const App = () => {
               </Card>
 
               {/* macOS */}
-              <Card className="p-3 sm:p-4 bg-slate-700/50 border-slate-600 hover:bg-slate-700 transition-all cursor-pointer hover:scale-105 transform duration-300">
+              <Card 
+                className="p-3 sm:p-4 bg-slate-700/50 border-slate-600 hover:bg-slate-700 transition-all cursor-pointer hover:scale-105 transform duration-300"
+                onClick={handleCompleteDownload}
+              >
                 <div className="flex items-center gap-2 sm:gap-3">
                   <div className="p-1.5 sm:p-2 bg-slate-500/20 rounded-lg">
                     <Laptop className="h-5 w-5 sm:h-6 sm:w-6 text-slate-300" />
@@ -1111,7 +1131,10 @@ const App = () => {
               </Card>
 
               {/* Linux */}
-              <Card className="p-3 sm:p-4 bg-slate-700/50 border-slate-600 hover:bg-slate-700 transition-all cursor-pointer hover:scale-105 transform duration-300">
+              <Card 
+                className="p-3 sm:p-4 bg-slate-700/50 border-slate-600 hover:bg-slate-700 transition-all cursor-pointer hover:scale-105 transform duration-300"
+                onClick={handleCompleteDownload}
+              >
                 <div className="flex items-center gap-2 sm:gap-3">
                   <div className="p-1.5 sm:p-2 bg-amber-500/20 rounded-lg">
                     <HardDrive className="h-5 w-5 sm:h-6 sm:w-6 text-amber-400" />
@@ -1128,7 +1151,10 @@ const App = () => {
               </Card>
 
               {/* Mobile */}
-              <Card className="p-3 sm:p-4 bg-slate-700/50 border-slate-600 hover:bg-slate-700 transition-all cursor-pointer hover:scale-105 transform duration-300">
+              <Card 
+                className="p-3 sm:p-4 bg-slate-700/50 border-slate-600 hover:bg-slate-700 transition-all cursor-pointer hover:scale-105 transform duration-300"
+                onClick={handleCompleteDownload}
+              >
                 <div className="flex items-center gap-2 sm:gap-3">
                   <div className="p-1.5 sm:p-2 bg-emerald-500/20 rounded-lg">
                     <Smartphone className="h-5 w-5 sm:h-6 sm:w-6 text-emerald-400" />
@@ -1169,6 +1195,50 @@ const App = () => {
           </div>
         </DialogContent>
       </Dialog>
+      
+      {/* Video Demo Modal */}
+      <Dialog open={videoModalOpen} onOpenChange={setVideoModalOpen}>
+        <DialogContent className="sm:max-w-4xl bg-slate-800 border-slate-700 mx-4 p-0 overflow-hidden">
+          <DialogHeader className="p-4 sm:p-6 border-b border-slate-700">
+            <DialogTitle className="text-slate-100 flex items-center gap-2 text-lg sm:text-xl">
+              <Play className="h-5 w-5" />
+              IWorkspace Demo
+            </DialogTitle>
+          </DialogHeader>
+          
+          <div className="aspect-video w-full">
+            <video 
+              src="/video/3163534-uhd_3840_2160_30fps.mp4" 
+              controls 
+              autoPlay 
+              className="w-full h-full object-cover"
+            >
+              Your browser does not support the video tag.
+            </video>
+          </div>
+          
+          <div className="p-4 sm:p-6 border-t border-slate-700 flex justify-end">
+            <Button
+              variant="outline"
+              className="border-slate-600 text-slate-300 hover:bg-slate-700"
+              onClick={() => setVideoModalOpen(false)}
+            >
+              <X className="h-4 w-4 mr-2" />
+              Close
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
+      
+      {/* Floating logo at the bottom corner */}
+      <div className="fixed bottom-6 right-6 z-50 animate-bounce hover:animate-none transition-all duration-300">
+        <img 
+          src="/logo/white_circle_360x360.png" 
+          alt="IWorkspace Logo" 
+          className="w-12 h-12 sm:w-16 sm:h-16 rounded-full shadow-lg hover:scale-110 transition-transform duration-300 cursor-pointer"
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        />
+      </div>
     </div>
   );
 };
