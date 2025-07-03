@@ -123,10 +123,12 @@ const App = () => {
   };
 
   const handleDownloadDesktopApp = () => {
-    // Create a temporary link element to trigger download
+    // Create a temporary link element to trigger download from Dropbox
     const link = document.createElement("a");
-    link.href = "/application/IWorkspace-0.1.0-win.exe";
+    link.href =
+      "https://www.dropbox.com/scl/fi/bmost3ko2t17gzp9cmji2/IWorkspace-0.1.0-win.exe?rlkey=aca7hsmbujuvocs1fcbp54c1c&st=0jjfmzrw&dl=1";
     link.download = "IWorkspace-0.1.0-win.exe";
+    link.target = "_blank"; // Open in new tab as fallback
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
