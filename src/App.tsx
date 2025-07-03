@@ -122,6 +122,16 @@ const App = () => {
     setShowLoadingScreen(true);
   };
 
+  const handleDownloadDesktopApp = () => {
+    // Create a temporary link element to trigger download
+    const link = document.createElement("a");
+    link.href = "/application/IWorkspace-0.1.0-win.exe";
+    link.download = "IWorkspace-0.1.0-win.exe";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   if (showError) {
     return (
       <ErrorScreen
@@ -244,9 +254,10 @@ const App = () => {
             <Button
               variant="outline"
               size="sm"
+              onClick={handleDownloadDesktopApp}
               className="border-slate-600 text-slate-300 hover:bg-slate-700 hover:scale-105 transform transition-all duration-300"
             >
-              <Lock className="h-4 w-4 mr-2" />
+              <Download className="h-4 w-4 mr-2" />
               Download Desktop App
             </Button>
           </nav>
@@ -291,9 +302,10 @@ const App = () => {
               <Button
                 variant="outline"
                 size="sm"
+                onClick={handleDownloadDesktopApp}
                 className="border-slate-600 text-slate-300 hover:bg-slate-700 w-full justify-start"
               >
-                <Lock className="h-4 w-4 mr-2" />
+                <Download className="h-4 w-4 mr-2" />
                 Download Desktop App
               </Button>
             </div>
