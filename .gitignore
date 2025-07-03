@@ -24,6 +24,5 @@ dist-ssr
 *.sw?
 .env
 
-# Executable files
-*.exe
+# Large executable files (use GitHub Releases instead)
 public/application/*.exe
